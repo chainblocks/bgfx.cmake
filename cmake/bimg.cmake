@@ -20,6 +20,8 @@ include( cmake/3rdparty/nvtt.cmake )
 include( cmake/3rdparty/pvrtc.cmake )
 include( cmake/3rdparty/tinyexr.cmake )
 
+option(BIMG_DECODE_ENABLE "" ON)
+
 # Ensure the directory exists
 if( NOT IS_DIRECTORY ${BIMG_DIR} )
 	message( SEND_ERROR "Could not load bimg, directory does not exist. ${BIMG_DIR}" )
@@ -31,6 +33,10 @@ file( GLOB BIMG_SOURCES ${BIMG_DIR}/src/*.cpp )
 
 # Create the bimg target
 add_library( bimg STATIC ${BIMG_SOURCES} )
+
+if(NOT BIMG_DECODE_ENABLE)
+	target_compile_definitions( bimg PUBLIC BIMG_DECODE_ENABLE=0)
+endif()
 
 # Add include directory of bimg
 target_include_directories( bimg
