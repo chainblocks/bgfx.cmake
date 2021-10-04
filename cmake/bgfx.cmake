@@ -55,15 +55,15 @@ endif()
 # Enable BGFX_CONFIG_DEBUG in Debug configuration
 target_compile_definitions( bgfx PRIVATE "$<$<CONFIG:Debug>:BGFX_CONFIG_DEBUG=1>" )
 if(BGFX_CONFIG_DEBUG)
-	target_compile_definitions( bgfx PRIVATE BGFX_CONFIG_DEBUG=1)
+	target_compile_definitions( bgfx PUBLIC BGFX_CONFIG_DEBUG=1)
 endif()
 
 if( NOT ${BGFX_OPENGL_VERSION} STREQUAL "" )
-	target_compile_definitions( bgfx PRIVATE BGFX_CONFIG_RENDERER_OPENGL_MIN_VERSION=${BGFX_OPENGL_VERSION} )
+	target_compile_definitions( bgfx PUBLIC BGFX_CONFIG_RENDERER_OPENGL_MIN_VERSION=${BGFX_OPENGL_VERSION} )
 endif()
 
 if( NOT ${BGFX_OPENGLES_VERSION} STREQUAL "" )
-	target_compile_definitions( bgfx PRIVATE BGFX_CONFIG_RENDERER_OPENGLES_MIN_VERSION=${BGFX_OPENGLES_VERSION} )
+	target_compile_definitions( bgfx PUBLIC BGFX_CONFIG_RENDERER_OPENGLES_MIN_VERSION=${BGFX_OPENGLES_VERSION} )
 endif()
 
 # Special Visual Studio Flags
